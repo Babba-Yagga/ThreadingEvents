@@ -58,7 +58,7 @@ class App(tb.Window):
 
 
     def startCount(self):
-        self.counterEvent = Event
+        self.counterEvent = Event()
         counter = myCounter(self, self.counterEvent)
         # .start(self, self.counterEvent, maximumCount=100)
 
