@@ -60,15 +60,13 @@ class App(tb.Window):
     def startCount(self):
         self.counterEvent = Event()
         counter = myCounter(self, self.counterEvent)
-        # .start(self, self.counterEvent, maximumCount=100)
-
-        # self.counterThread = Thread(target=counter.start, daemon=True)
         self.counterThread = Thread(target=myCounter.startCounting, args=(counter,), daemon=True) 
         self.counterThread.start()
 
 
     def stopCount(self):
-        self.counterEvent.set()
+        if (self.counterEvent is not None):
+            self.counterEvent.set()
 
 
     def bindEventsCommands(self):

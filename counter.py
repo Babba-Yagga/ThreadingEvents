@@ -17,7 +17,7 @@ class myCounter():
             print(f"Count = {i:3}")
             sleep(.1)
 
-            if i % 10 == 0 and self.event.isSet():
+            if i % 5 == 0 and self.event.isSet():
                 print('\nThe thread was aborted.')
                 break
 
