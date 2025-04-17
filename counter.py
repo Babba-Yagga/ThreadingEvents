@@ -19,7 +19,7 @@ class myCounter():
 
             if i % 5 == 0 and self.event.isSet():
                 print('\nThe thread was aborted.')
-                break
+                return
 
         else:
             print('\nThe thread ran to completion.')
