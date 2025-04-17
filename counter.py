@@ -15,18 +15,18 @@ class myCounter():
     def startCounting(self):
         threadID = threading.get_native_id()
 
-        print(f"\nThread [{threadID}] has started...")
+        print(f"\nThread ID [{threadID}] has started...")
 
         for i in range(1, self.maximumCount+1):
             print(f"  Count = {i:3}")
             sleep(.1)
 
             if self.event.isSet():
-                print(f"\nThread [{threadID}] was aborted!")
+                print(f"Thread ID [{threadID}] was aborted!")
                 return
 
         else:
-            print(F"\nThread [{threadID}] ran to completion!")
+            print(f"Thread ID [{threadID}] ran to completion!")
             
 
 

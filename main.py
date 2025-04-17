@@ -56,7 +56,7 @@ class App(tb.Window):
                             )
 
 
-    def btnCountClickHandler(self):
+    def btnStartClickEventHandler(self):
         if self.btnStart.cget("text").lower() == "start":
             self.startCount()
         else:
@@ -78,7 +78,7 @@ class App(tb.Window):
 
 
     def bindEventsCommands(self):
-        self.btnStart.configure(command=self.btnCountClickHandler)
+        self.btnStart.configure(command=self.btnStartClickEventHandler)
         self.btnExit.configure(command=self.destroy)
 
 
