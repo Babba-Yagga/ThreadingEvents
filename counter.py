@@ -1,4 +1,5 @@
 
+import threading
 from threading import Thread, Event
 from time import sleep
 
@@ -12,17 +13,20 @@ class myCounter():
 
 
     def startCounting(self):
+        threadID = threading.get_native_id()
+
+        print(f"\nThread [{threadID}] has started...")
 
         for i in range(1, self.maximumCount+1):
-            print(f"Count = {i:3}")
+            print(f"  Count = {i:3}")
             sleep(.1)
 
-            if i % 5 == 0 and self.event.isSet():
-                print('\nThe thread was aborted.')
+            if self.event.isSet():
+                print(f"\nThread [{threadID}] was aborted!")
                 return
 
         else:
-            print('\nThe thread ran to completion.')
+            print(F"\nThread [{threadID}] ran to completion!")
             
 
 

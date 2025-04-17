@@ -3,7 +3,6 @@
 from tkinter import *
 from threading import Thread, Event
 import ttkbootstrap as tb
-# from ttkbootstrap.dialogs import Messagebox
 from counter import myCounter
 
 
@@ -48,13 +47,20 @@ class App(tb.Window):
                             width=10
                             )
 
-        self.btnStop=tb.Button(
+        self.btnExit=tb.Button(
                             master=self.frmControls, 
-                            text="Stop", 
+                            text="Exit", 
                             bootstyle=(tb.PRIMARY, tb.OUTLINE),
                             style="primary.Outline.TButton",
                             width=10                            
                             )
+
+
+    def btnCountClickHandler(self):
+        if self.btnStart.cget("text").lower() == "start":
+            self.startCount()
+        else:
+            self.stopCount()
 
 
     def startCount(self):
@@ -62,21 +68,23 @@ class App(tb.Window):
         counter = myCounter(self, self.counterEvent)
         self.counterThread = Thread(target=myCounter.startCounting, args=(counter,), daemon=True) 
         self.counterThread.start()
+        self.btnStart.config(text="Abort")        
 
 
     def stopCount(self):
         if (self.counterEvent is not None):
             self.counterEvent.set()
+            self.btnStart.config(text="Start")            
 
 
     def bindEventsCommands(self):
-        self.btnStart.configure(command=self.startCount)
-        self.btnStop.configure(command=self.stopCount)
+        self.btnStart.configure(command=self.btnCountClickHandler)
+        self.btnExit.configure(command=self.destroy)
 
 
     def configureGrid(self):
         self.btnStart.grid(padx=(10,10), pady=(0,5), sticky="EW", row=1, column=0)
-        self.btnStop.grid(padx=(55,10), pady=(0,5), sticky="EW", row=1, column=1)
+        self.btnExit.grid(padx=(55,10), pady=(0,5), sticky="EW", row=1, column=1)
         
 
     def centerWindow(self, width: int, height: int):
